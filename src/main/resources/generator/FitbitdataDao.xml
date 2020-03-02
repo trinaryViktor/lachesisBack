@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.inf191.lachesis.generate.FitbitdataDao">
+  <resultMap id="BaseResultMap" type="com.inf191.lachesis.generate.Fitbitdata">
+    <id column="fid" jdbcType="INTEGER" property="fid" />
+    <result column="heart_rate" jdbcType="INTEGER" property="heartRate" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    fid, heart_rate, `time`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from fitbitData
+    where fid = #{fid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from fitbitData
+    where fid = #{fid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="fid" keyProperty="fid" parameterType="com.inf191.lachesis.generate.Fitbitdata" useGeneratedKeys="true">
+    insert into fitbitData (heart_rate, `time`)
+    values (#{heartRate,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="fid" keyProperty="fid" parameterType="com.inf191.lachesis.generate.Fitbitdata" useGeneratedKeys="true">
+    insert into fitbitData
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="heartRate != null">
+        heart_rate,
+      </if>
+      <if test="time != null">
+        `time`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="heartRate != null">
+        #{heartRate,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.inf191.lachesis.generate.Fitbitdata">
+    update fitbitData
+    <set>
+      <if test="heartRate != null">
+        heart_rate = #{heartRate,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        `time` = #{time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.inf191.lachesis.generate.Fitbitdata">
+    update fitbitData
+    set heart_rate = #{heartRate,jdbcType=INTEGER},
+      `time` = #{time,jdbcType=TIMESTAMP}
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+</mapper>

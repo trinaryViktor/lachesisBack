@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.inf191.lachesis.generate.PatientsFitbitDao">
+  <resultMap id="BaseResultMap" type="com.inf191.lachesis.generate.PatientsFitbit">
+    <id column="matchId" jdbcType="INTEGER" property="matchid" />
+    <result column="mid" jdbcType="INTEGER" property="mid" />
+    <result column="fid" jdbcType="INTEGER" property="fid" />
+    <result column="start" jdbcType="TIMESTAMP" property="start" />
+    <result column="finish" jdbcType="TIMESTAMP" property="finish" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    matchId, mid, fid, `start`, finish
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from patients_fitbit
+    where matchId = #{matchid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from patients_fitbit
+    where matchId = #{matchid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="matchId" keyProperty="matchid" parameterType="com.inf191.lachesis.generate.PatientsFitbit" useGeneratedKeys="true">
+    insert into patients_fitbit (mid, fid, `start`, 
+      finish)
+    values (#{mid,jdbcType=INTEGER}, #{fid,jdbcType=INTEGER}, #{start,jdbcType=TIMESTAMP}, 
+      #{finish,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="matchId" keyProperty="matchid" parameterType="com.inf191.lachesis.generate.PatientsFitbit" useGeneratedKeys="true">
+    insert into patients_fitbit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mid != null">
+        mid,
+      </if>
+      <if test="fid != null">
+        fid,
+      </if>
+      <if test="start != null">
+        `start`,
+      </if>
+      <if test="finish != null">
+        finish,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mid != null">
+        #{mid,jdbcType=INTEGER},
+      </if>
+      <if test="fid != null">
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="start != null">
+        #{start,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finish != null">
+        #{finish,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.inf191.lachesis.generate.PatientsFitbit">
+    update patients_fitbit
+    <set>
+      <if test="mid != null">
+        mid = #{mid,jdbcType=INTEGER},
+      </if>
+      <if test="fid != null">
+        fid = #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="start != null">
+        `start` = #{start,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finish != null">
+        finish = #{finish,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where matchId = #{matchid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.inf191.lachesis.generate.PatientsFitbit">
+    update patients_fitbit
+    set mid = #{mid,jdbcType=INTEGER},
+      fid = #{fid,jdbcType=INTEGER},
+      `start` = #{start,jdbcType=TIMESTAMP},
+      finish = #{finish,jdbcType=TIMESTAMP}
+    where matchId = #{matchid,jdbcType=INTEGER}
+  </update>
+</mapper>

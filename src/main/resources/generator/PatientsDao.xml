@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.inf191.lachesis.generate.PatientsDao">
+  <resultMap id="BaseResultMap" type="com.inf191.lachesis.generate.Patients">
+    <id column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="mid" jdbcType="INTEGER" property="mid" />
+    <result column="dobyear" jdbcType="INTEGER" property="dobyear" />
+    <result column="dobmonth" jdbcType="INTEGER" property="dobmonth" />
+    <result column="dobday" jdbcType="INTEGER" property="dobday" />
+    <result column="first_name" jdbcType="VARCHAR" property="firstName" />
+    <result column="middle_name" jdbcType="VARCHAR" property="middleName" />
+    <result column="last_name" jdbcType="VARCHAR" property="lastName" />
+    <result column="weight" jdbcType="INTEGER" property="weight" />
+    <result column="height" jdbcType="INTEGER" property="height" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pid, mid, dobyear, dobmonth, dobday, first_name, middle_name, last_name, weight, 
+    height, `location`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from patients
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from patients
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="pid" keyProperty="pid" parameterType="com.inf191.lachesis.generate.Patients" useGeneratedKeys="true">
+    insert into patients (mid, dobyear, dobmonth, 
+      dobday, first_name, middle_name, 
+      last_name, weight, height, 
+      `location`)
+    values (#{mid,jdbcType=INTEGER}, #{dobyear,jdbcType=INTEGER}, #{dobmonth,jdbcType=INTEGER}, 
+      #{dobday,jdbcType=INTEGER}, #{firstName,jdbcType=VARCHAR}, #{middleName,jdbcType=VARCHAR}, 
+      #{lastName,jdbcType=VARCHAR}, #{weight,jdbcType=INTEGER}, #{height,jdbcType=INTEGER}, 
+      #{location,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="pid" keyProperty="pid" parameterType="com.inf191.lachesis.generate.Patients" useGeneratedKeys="true">
+    insert into patients
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mid != null">
+        mid,
+      </if>
+      <if test="dobyear != null">
+        dobyear,
+      </if>
+      <if test="dobmonth != null">
+        dobmonth,
+      </if>
+      <if test="dobday != null">
+        dobday,
+      </if>
+      <if test="firstName != null">
+        first_name,
+      </if>
+      <if test="middleName != null">
+        middle_name,
+      </if>
+      <if test="lastName != null">
+        last_name,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="location != null">
+        `location`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mid != null">
+        #{mid,jdbcType=INTEGER},
+      </if>
+      <if test="dobyear != null">
+        #{dobyear,jdbcType=INTEGER},
+      </if>
+      <if test="dobmonth != null">
+        #{dobmonth,jdbcType=INTEGER},
+      </if>
+      <if test="dobday != null">
+        #{dobday,jdbcType=INTEGER},
+      </if>
+      <if test="firstName != null">
+        #{firstName,jdbcType=VARCHAR},
+      </if>
+      <if test="middleName != null">
+        #{middleName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastName != null">
+        #{lastName,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=INTEGER},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.inf191.lachesis.generate.Patients">
+    update patients
+    <set>
+      <if test="mid != null">
+        mid = #{mid,jdbcType=INTEGER},
+      </if>
+      <if test="dobyear != null">
+        dobyear = #{dobyear,jdbcType=INTEGER},
+      </if>
+      <if test="dobmonth != null">
+        dobmonth = #{dobmonth,jdbcType=INTEGER},
+      </if>
+      <if test="dobday != null">
+        dobday = #{dobday,jdbcType=INTEGER},
+      </if>
+      <if test="firstName != null">
+        first_name = #{firstName,jdbcType=VARCHAR},
+      </if>
+      <if test="middleName != null">
+        middle_name = #{middleName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastName != null">
+        last_name = #{lastName,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=INTEGER},
+      </if>
+      <if test="location != null">
+        `location` = #{location,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.inf191.lachesis.generate.Patients">
+    update patients
+    set mid = #{mid,jdbcType=INTEGER},
+      dobyear = #{dobyear,jdbcType=INTEGER},
+      dobmonth = #{dobmonth,jdbcType=INTEGER},
+      dobday = #{dobday,jdbcType=INTEGER},
+      first_name = #{firstName,jdbcType=VARCHAR},
+      middle_name = #{middleName,jdbcType=VARCHAR},
+      last_name = #{lastName,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=INTEGER},
+      height = #{height,jdbcType=INTEGER},
+      `location` = #{location,jdbcType=VARCHAR}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+</mapper>
