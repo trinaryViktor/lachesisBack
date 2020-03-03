@@ -7,11 +7,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PatientsServiceImpl implements PatientsService {
-    @Autowired
-    PatientsDao patientsDao;
+   @Autowired
+   PatientsDao patientsDao;
 
     @Override
     public Patients selectByPrimaryKey(int id) {
         return patientsDao.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public Patients updateByPrimaryKey(Patients patients) {
+        return patients;
     }
 }
