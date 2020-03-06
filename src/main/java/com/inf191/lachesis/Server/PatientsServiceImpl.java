@@ -16,7 +16,11 @@ public class PatientsServiceImpl implements PatientsService {
     }
 
     @Override
-    public Patients updateByPrimaryKey(Patients patients) {
-        return patients;
+    public int updateByPrimaryKey(Patients patients) {
+        return patientsDao.updateByPrimaryKey(patients);
+    }
+
+    public int insert(Patients paitents){
+        return patientsDao.insert(paitents);
     }
 }
