@@ -20,7 +20,23 @@ public class PatientsServiceImpl implements PatientsService {
         return patientsDao.updateByPrimaryKey(patients);
     }
 
+    @Override
     public int insert(Patients paitents){
         return patientsDao.insert(paitents);
+    }
+
+    @Override
+    public int insertSelective(Patients patients) {
+        return patientsDao.insertSelective(patients);
+    }
+
+    @Override
+    public int deleteByPrimaryKey(int id) {
+        return patientsDao.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(Patients patients) {
+        return patientsDao.updateByPrimaryKeySelective(patients);
     }
 }

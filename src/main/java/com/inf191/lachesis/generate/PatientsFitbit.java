@@ -13,7 +13,7 @@ import lombok.Setter;
 @Data
 @Setter
 @Getter
-public class PatientsFitbit implements Serializable {
+public abstract class PatientsFitbit implements Serializable {
     private Integer matchid;
 
     private Integer mid;
@@ -25,4 +25,10 @@ public class PatientsFitbit implements Serializable {
     private Date finish;
 
     private static final long serialVersionUID = 1L;
+
+    public abstract PatientsFitbit selectByPrimaryKey(int id);
+
+    public abstract int uploadConnection(PatientsFitbit patientsFitbit);
+
+    public abstract int updateConnection(PatientsFitbit patientsFitbit);
 }
