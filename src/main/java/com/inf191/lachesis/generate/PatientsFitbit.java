@@ -13,7 +13,7 @@ import lombok.Setter;
 @Data
 @Setter
 @Getter
-public abstract class PatientsFitbit implements Serializable {
+public class PatientsFitbit implements Serializable {
     private Integer matchid;
 
     private Integer mid;

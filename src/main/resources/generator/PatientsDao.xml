@@ -12,11 +12,10 @@
     <result column="last_name" jdbcType="VARCHAR" property="lastName" />
     <result column="weight" jdbcType="INTEGER" property="weight" />
     <result column="height" jdbcType="INTEGER" property="height" />
-    <result column="location" jdbcType="VARCHAR" property="location" />
   </resultMap>
   <sql id="Base_Column_List">
     pid, mid, dobyear, dobmonth, dobday, first_name, middle_name, last_name, weight, 
-    height, `location`
+    height
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -31,12 +30,12 @@
   <insert id="insert" keyColumn="pid" keyProperty="pid" parameterType="com.inf191.lachesis.generate.Patients" useGeneratedKeys="true">
     insert into patients (mid, dobyear, dobmonth, 
       dobday, first_name, middle_name, 
-      last_name, weight, height, 
-      `location`)
+      last_name, weight, height
+      )
     values (#{mid,jdbcType=INTEGER}, #{dobyear,jdbcType=INTEGER}, #{dobmonth,jdbcType=INTEGER}, 
       #{dobday,jdbcType=INTEGER}, #{firstName,jdbcType=VARCHAR}, #{middleName,jdbcType=VARCHAR}, 
-      #{lastName,jdbcType=VARCHAR}, #{weight,jdbcType=INTEGER}, #{height,jdbcType=INTEGER}, 
-      #{location,jdbcType=VARCHAR})
+      #{lastName,jdbcType=VARCHAR}, #{weight,jdbcType=INTEGER}, #{height,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="pid" keyProperty="pid" parameterType="com.inf191.lachesis.generate.Patients" useGeneratedKeys="true">
     insert into patients
@@ -68,9 +67,6 @@
       <if test="height != null">
         height,
       </if>
-      <if test="location != null">
-        `location`,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="mid != null">
@@ -99,9 +95,6 @@
       </if>
       <if test="height != null">
         #{height,jdbcType=INTEGER},
-      </if>
-      <if test="location != null">
-        #{location,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -135,9 +128,6 @@
       <if test="height != null">
         height = #{height,jdbcType=INTEGER},
       </if>
-      <if test="location != null">
-        `location` = #{location,jdbcType=VARCHAR},
-      </if>
     </set>
     where pid = #{pid,jdbcType=INTEGER}
   </update>
@@ -151,8 +141,7 @@
       middle_name = #{middleName,jdbcType=VARCHAR},
       last_name = #{lastName,jdbcType=VARCHAR},
       weight = #{weight,jdbcType=INTEGER},
-      height = #{height,jdbcType=INTEGER},
-      `location` = #{location,jdbcType=VARCHAR}
+      height = #{height,jdbcType=INTEGER}
     where pid = #{pid,jdbcType=INTEGER}
   </update>
 </mapper>

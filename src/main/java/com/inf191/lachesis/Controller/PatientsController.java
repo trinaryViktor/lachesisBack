@@ -16,7 +16,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value="/api")
-
+@CrossOrigin
 
 public class PatientsController {
 
@@ -49,7 +49,7 @@ public class PatientsController {
      * @apiSuccess {String} error 500
      */
     @RequestMapping(method = RequestMethod.POST ,value="/uploadPatientsByJSON")
-    public String uploadPatients(@RequestBody @Valid Patients patients,BindingResult bindingResult){
+    public String uploadPatients(@RequestBody @Valid Patients patients){
         patientsServiceImpl.insert(patients);
         return patients.toString();
     }

@@ -7,18 +7,19 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * fitbitdata
+ * locationData
  * @author 
  */
 @Data
 @Setter
 @Getter
-public class Fitbitdata implements Serializable {
-    private Integer heardataid;
 
-    private Integer fid;
+public class Locationdata implements Serializable {
+    private Integer locationid;
 
-    private Integer heartrate;
+    private Integer mid;
+
+    private String location;
 
     private Date time;
 

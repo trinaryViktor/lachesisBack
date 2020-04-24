@@ -9,6 +9,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value="/api")
+@CrossOrigin
 public class PatientsFitbitController {
     @Autowired
     PatientFitbitServiceImpl patientFitbitServiceImpl;

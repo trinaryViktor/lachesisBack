@@ -2,40 +2,49 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.inf191.lachesis.generate.FitbitdataDao">
   <resultMap id="BaseResultMap" type="com.inf191.lachesis.generate.Fitbitdata">
-    <id column="fid" jdbcType="INTEGER" property="fid" />
-    <result column="heart_rate" jdbcType="INTEGER" property="heartRate" />
+    <id column="hearDataId" jdbcType="INTEGER" property="heardataid" />
+    <result column="fid" jdbcType="INTEGER" property="fid" />
+    <result column="heartRate" jdbcType="INTEGER" property="heartrate" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
   </resultMap>
   <sql id="Base_Column_List">
-    fid, heart_rate, `time`
+    hearDataId, fid, heartRate, `time`
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from fitbitData
+    from fitbitdata
     where fid = #{fid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from fitbitData
-    where fid = #{fid,jdbcType=INTEGER}
+    delete from fitbitdata
+    where hearDataId = #{heardataid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="fid" keyProperty="fid" parameterType="com.inf191.lachesis.generate.Fitbitdata" useGeneratedKeys="true">
-    insert into fitbitData (heart_rate, `time`)
-    values (#{heartRate,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP})
+  <insert id="insert" keyColumn="hearDataId" keyProperty="heardataid" parameterType="com.inf191.lachesis.generate.Fitbitdata" useGeneratedKeys="true">
+    insert into fitbitdata (fid, heartRate, `time`
+      )
+    values (#{fid,jdbcType=INTEGER}, #{heartrate,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" keyColumn="fid" keyProperty="fid" parameterType="com.inf191.lachesis.generate.Fitbitdata" useGeneratedKeys="true">
-    insert into fitbitData
+  <insert id="insertSelective" keyColumn="hearDataId" keyProperty="heardataid" parameterType="com.inf191.lachesis.generate.Fitbitdata" useGeneratedKeys="true">
+    insert into fitbitdata
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="heartRate != null">
-        heart_rate,
+      <if test="fid != null">
+        fid,
+      </if>
+      <if test="heartrate != null">
+        heartRate,
       </if>
       <if test="time != null">
         `time`,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="heartRate != null">
-        #{heartRate,jdbcType=INTEGER},
+      <if test="fid != null">
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="heartrate != null">
+        #{heartrate,jdbcType=INTEGER},
       </if>
       <if test="time != null">
         #{time,jdbcType=TIMESTAMP},
@@ -43,21 +52,25 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.inf191.lachesis.generate.Fitbitdata">
-    update fitbitData
+    update fitbitdata
     <set>
-      <if test="heartRate != null">
-        heart_rate = #{heartRate,jdbcType=INTEGER},
+      <if test="fid != null">
+        fid = #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="heartrate != null">
+        heartRate = #{heartrate,jdbcType=INTEGER},
       </if>
       <if test="time != null">
         `time` = #{time,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where fid = #{fid,jdbcType=INTEGER}
+    where hearDataId = #{heardataid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.inf191.lachesis.generate.Fitbitdata">
-    update fitbitData
-    set heart_rate = #{heartRate,jdbcType=INTEGER},
+    update fitbitdata
+    set fid = #{fid,jdbcType=INTEGER},
+      heartRate = #{heartrate,jdbcType=INTEGER},
       `time` = #{time,jdbcType=TIMESTAMP}
-    where fid = #{fid,jdbcType=INTEGER}
+    where hearDataId = #{heardataid,jdbcType=INTEGER}
   </update>
 </mapper>

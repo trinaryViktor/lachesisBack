@@ -1,6 +1,5 @@
 package com.inf191.lachesis.generate;
 
-
 public interface PatientsDao {
     int deleteByPrimaryKey(Integer pid);
 
