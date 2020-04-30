@@ -10,11 +10,19 @@
   <sql id="Base_Column_List">
     hearDataId, fid, heartRate, `time`
   </sql>
+
+  <select id="selectAllByFid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fitbitdata
+    where fid = #{fid,jdbcType=INTEGER}
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from fitbitdata
-    where fid = #{fid,jdbcType=INTEGER}
+    where hearDataId = #{heardataid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from fitbitdata

@@ -50,7 +50,16 @@ public class PatientsController {
      */
     @RequestMapping(method = RequestMethod.POST ,value="/uploadPatientsByJSON")
     public String uploadPatients(@RequestBody @Valid Patients patients){
-        patientsServiceImpl.insert(patients);
+        Patients localPatient = new Patients();
+        localPatient.setDobday(patients.getDobday());
+        localPatient.setDobmonth(patients.getDobmonth());
+        localPatient.setDobyear(patients.getDobyear());
+        localPatient.setFirstName(patients.getFirstName());
+        localPatient.setLastName(patients.getLastName());
+        localPatient.setMid(patients.getMid());
+        localPatient.setWeight(patients.getWeight());
+        localPatient.setHeight(patients.getHeight());
+        patientsServiceImpl.insert(localPatient);
         return patients.toString();
     }
 
@@ -82,4 +91,7 @@ public class PatientsController {
     public int delatePatientById(@PathVariable("id") int id){
         return patientsServiceImpl.deleteByPrimaryKey(id);
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getAllPatients")
+    public List<Patients> getAllPatients(){return patientsServiceImpl.selectAllPatients();}
 }

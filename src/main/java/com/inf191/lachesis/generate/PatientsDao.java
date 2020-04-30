@@ -1,7 +1,15 @@
 package com.inf191.lachesis.generate;
 
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
 public interface PatientsDao {
     int deleteByPrimaryKey(Integer pid);
+
+
+    List<Patients> selectAllPatients();
 
     int insert(Patients record);
 

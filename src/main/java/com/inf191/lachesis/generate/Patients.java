@@ -1,14 +1,22 @@
 package com.inf191.lachesis.generate;
 
 import java.io.Serializable;
-import lombok.Data;
+
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 /**
  * patients
  * @author 
  */
 @Data
-public class Patients implements Serializable {
+@Setter
+@Getter
+@AllArgsConstructor
+@SuperBuilder
+public class Patients implements Serializable{
+
+
     private Integer pid;
 
     private Integer mid;
@@ -30,4 +38,8 @@ public class Patients implements Serializable {
     private Integer height;
 
     private static final long serialVersionUID = 1L;
+
+    public Patients() {
+
+    }
 }

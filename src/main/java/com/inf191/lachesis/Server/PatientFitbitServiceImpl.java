@@ -5,6 +5,8 @@ import com.inf191.lachesis.generate.PatientsFitbitDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PatientFitbitServiceImpl implements PatientFitbitService {
     @Autowired
@@ -24,6 +26,11 @@ public class PatientFitbitServiceImpl implements PatientFitbitService {
     @Override
     public int insertSelective(PatientsFitbit record) {
         return patientsFitbitDao.insertSelective(record);
+    }
+
+    @Override
+    public List<PatientsFitbit> selectActiveId() {
+        return patientsFitbitDao.selectActiveId();
     }
 
     @Override

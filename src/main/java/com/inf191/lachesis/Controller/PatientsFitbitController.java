@@ -41,7 +41,12 @@ public class PatientsFitbitController {
      */
     @RequestMapping(method= RequestMethod.POST, value="/uploadConnectById")
     public String uploadConnect(@RequestBody @Valid PatientsFitbit patientsFitbit){
-        patientFitbitServiceImpl.insert(patientsFitbit);
+        PatientsFitbit pf = new PatientsFitbit();
+        pf.setFid(patientsFitbit.getFid());
+        pf.setPid(patientsFitbit.getPid());
+        pf.setStart(patientsFitbit.getStart());
+        pf.setFinish(patientsFitbit.getFinish());
+        patientFitbitServiceImpl.insert(pf);
         return patientsFitbit.toString();
     }
 

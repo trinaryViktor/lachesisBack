@@ -13,7 +13,6 @@ import lombok.Setter;
 @Data
 @Setter
 @Getter
-
 public class Locationdata implements Serializable {
     private Integer locationid;
 

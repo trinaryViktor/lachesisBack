@@ -3,14 +3,23 @@
 <mapper namespace="com.inf191.lachesis.generate.PatientsFitbitDao">
   <resultMap id="BaseResultMap" type="com.inf191.lachesis.generate.PatientsFitbit">
     <id column="matchId" jdbcType="INTEGER" property="matchid" />
-    <result column="mid" jdbcType="INTEGER" property="mid" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
     <result column="fid" jdbcType="INTEGER" property="fid" />
     <result column="start" jdbcType="TIMESTAMP" property="start" />
     <result column="finish" jdbcType="TIMESTAMP" property="finish" />
   </resultMap>
   <sql id="Base_Column_List">
-    matchId, mid, fid, `start`, finish
+    matchId, pid, fid, `start`, finish
   </sql>
+
+  <select id="selectActiveId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from patients_fitbit
+    where finish=null;
+
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -22,16 +31,16 @@
     where matchId = #{matchid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="matchId" keyProperty="matchid" parameterType="com.inf191.lachesis.generate.PatientsFitbit" useGeneratedKeys="true">
-    insert into patients_fitbit (mid, fid, `start`, 
+    insert into patients_fitbit (pid, fid, `start`,
       finish)
-    values (#{mid,jdbcType=INTEGER}, #{fid,jdbcType=INTEGER}, #{start,jdbcType=TIMESTAMP}, 
+    values (#{pid,jdbcType=INTEGER}, #{fid,jdbcType=INTEGER}, #{start,jdbcType=TIMESTAMP},
       #{finish,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="matchId" keyProperty="matchid" parameterType="com.inf191.lachesis.generate.PatientsFitbit" useGeneratedKeys="true">
     insert into patients_fitbit
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="mid != null">
-        mid,
+      <if test="pid != null">
+        pid,
       </if>
       <if test="fid != null">
         fid,
@@ -44,8 +53,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="mid != null">
-        #{mid,jdbcType=INTEGER},
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
       </if>
       <if test="fid != null">
         #{fid,jdbcType=INTEGER},
@@ -61,8 +70,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.inf191.lachesis.generate.PatientsFitbit">
     update patients_fitbit
     <set>
-      <if test="mid != null">
-        mid = #{mid,jdbcType=INTEGER},
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
       </if>
       <if test="fid != null">
         fid = #{fid,jdbcType=INTEGER},
@@ -78,7 +87,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.inf191.lachesis.generate.PatientsFitbit">
     update patients_fitbit
-    set mid = #{mid,jdbcType=INTEGER},
+    set pid = #{pid,jdbcType=INTEGER},
       fid = #{fid,jdbcType=INTEGER},
       `start` = #{start,jdbcType=TIMESTAMP},
       finish = #{finish,jdbcType=TIMESTAMP}

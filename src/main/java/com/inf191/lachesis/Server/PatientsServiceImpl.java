@@ -5,6 +5,8 @@ import com.inf191.lachesis.generate.PatientsDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PatientsServiceImpl implements PatientsService {
    @Autowired
@@ -13,6 +15,11 @@ public class PatientsServiceImpl implements PatientsService {
     @Override
     public Patients selectByPrimaryKey(int id) {
         return patientsDao.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Patients> selectAllPatients() {
+        return patientsDao.selectAllPatients();
     }
 
     @Override

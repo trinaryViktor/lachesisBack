@@ -5,6 +5,8 @@ import com.inf191.lachesis.generate.FitbitdataDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FitbitdataServiceImpl implements FitbitdataService {
     @Autowired
@@ -27,6 +29,12 @@ public class FitbitdataServiceImpl implements FitbitdataService {
     }
 
     @Override
+    public List<Fitbitdata> selectAllByFid(Integer fid) {
+        return fitbitdataDao.selectAllByFid(fid);
+    }
+
+
+    @Override
     public Fitbitdata selectByPrimaryKey(Integer fid) {
         return fitbitdataDao.selectByPrimaryKey(fid);
     }
@@ -40,4 +48,5 @@ public class FitbitdataServiceImpl implements FitbitdataService {
     public int updateByPrimaryKey(Fitbitdata record) {
         return fitbitdataDao.updateByPrimaryKey(record);
     }
+
 }
