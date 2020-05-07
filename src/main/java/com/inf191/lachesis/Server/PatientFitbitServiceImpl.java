@@ -5,6 +5,8 @@ import com.inf191.lachesis.generate.PatientsFitbitDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -23,6 +25,8 @@ public class PatientFitbitServiceImpl implements PatientFitbitService {
         return patientsFitbitDao.insert(record);
     }
 
+
+
     @Override
     public int insertSelective(PatientsFitbit record) {
         return patientsFitbitDao.insertSelective(record);
@@ -32,6 +36,12 @@ public class PatientFitbitServiceImpl implements PatientFitbitService {
     public List<PatientsFitbit> selectActiveId() {
         return patientsFitbitDao.selectActiveId();
     }
+
+    @Override
+    public List<PatientsFitbit> selectByPid(int pid) {
+        return patientsFitbitDao.selectByPid(pid);
+    }
+
 
     @Override
     public PatientsFitbit selectByPrimaryKey(Integer matchid) {

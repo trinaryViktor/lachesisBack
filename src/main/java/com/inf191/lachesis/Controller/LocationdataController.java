@@ -17,9 +17,9 @@ public class LocationdataController {
     @Autowired
     LocationdataServiceImpl locationdataServiceImpl;
 
-    @RequestMapping(method= RequestMethod.GET ,value ="/getbylid={fid}")
-    private Locationdata getLocation(@PathVariable("fid") int fid){
-        return locationdataServiceImpl.selectByPrimaryKey(fid);
+    @RequestMapping(method= RequestMethod.GET ,value ="/getbylid={lid}")
+    private Locationdata getLocation(@PathVariable("lid") int lid){
+        return locationdataServiceImpl.selectByPrimaryKey(lid);
     }
 
     @PostMapping( "/updateLocationByJSON")
@@ -32,11 +32,15 @@ public class LocationdataController {
         return locationdataServiceImpl.updateByPrimaryKey(ldata);
     }
 
+
     @PostMapping( "/insertLocationByJSON")
     public int insertLocation(@RequestBody @Valid Locationdata locationdata){
         Locationdata ldata = new Locationdata();
         ldata.setMid(locationdata.getMid());
-        ldata.setLocation(locationdata.getLocation());
+        if(locationdata.getLocationid().equals("adt35s6d7b78dh9k06d9ns126s8bd7fj3")){
+            ldata.setLocation("room F");
+        }
+
         ldata.setTime(locationdata.getTime());
 
         return locationdataServiceImpl.insert(ldata);

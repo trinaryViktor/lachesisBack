@@ -15,14 +15,19 @@
 
   </resultMap>
 
-
-
   <sql id="Base_Column_List">
     pid, mid, dobyear, dobmonth, dobday, first_name, middle_name, last_name, weight, 
     height
   </sql>
 
-
+  <select id="getActivePatietns" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    p.pid,p.mid,p.dobyear,p.dobmonth, p.dobday,p.first_name, p.middle_Name, p.last_name, p.weight,
+    p.height
+from patients p
+inner join patients_fitbit pf
+on (p.pid=pf.pid) where ISNULL(pf.finish)
+  </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -32,7 +37,7 @@
   </select>
   <select id="selectAllPatients" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
-    *
+    <include refid="Base_Column_List" />
     from patients
   </select>
 
@@ -40,7 +45,11 @@
     delete from patients
     where pid = #{pid,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" keyColumn="pid" keyProperty="pid" parameterType="com.inf191.lachesis.generate.Patients" useGeneratedKeys="true">
+    <selectKey resultType = "java.lang.Integer" order="AFTER" keyProperty="pid">
+    select @@IDENTITY as pid
+    </selectKey>
     insert into patients (mid, dobyear, dobmonth,
       dobday, first_name, middle_name, 
       last_name, weight, height
@@ -49,8 +58,8 @@
       #{dobday,jdbcType=INTEGER}, #{firstName,jdbcType=VARCHAR}, #{middleName,jdbcType=VARCHAR},
       #{lastName,jdbcType=VARCHAR}, #{weight,jdbcType=INTEGER}, #{height,jdbcType=INTEGER}
       )
-
   </insert>
+
   <insert id="insertSelective" keyColumn="pid" keyProperty="pid" parameterType="com.inf191.lachesis.generate.Patients" useGeneratedKeys="true">
     insert into patients
     <trim prefix="(" suffix=")" suffixOverrides=",">

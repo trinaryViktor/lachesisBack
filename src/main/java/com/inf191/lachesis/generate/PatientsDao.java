@@ -20,4 +20,6 @@ public interface PatientsDao {
     int updateByPrimaryKeySelective(Patients record);
 
     int updateByPrimaryKey(Patients record);
+
+    List<Patients> getActivePatietns();
 }

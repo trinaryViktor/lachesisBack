@@ -14,6 +14,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class PatientsFitbit implements Serializable {
+
     private Integer matchid;
 
     private Integer pid;

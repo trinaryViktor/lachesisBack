@@ -46,4 +46,10 @@ public class PatientsServiceImpl implements PatientsService {
     public int updateByPrimaryKeySelective(Patients patients) {
         return patientsDao.updateByPrimaryKeySelective(patients);
     }
+
+    @Override
+    public List<Patients> getActivePatietns(){
+        return patientsDao.getActivePatietns();
+    }
+
 }

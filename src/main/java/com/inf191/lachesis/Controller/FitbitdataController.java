@@ -12,6 +12,11 @@ import java.util.List;
 @RequestMapping(value="/api")
 @CrossOrigin
 public class FitbitdataController {
+
+    static Fitbitdata recentFit1 = null;
+    static Fitbitdata recentFit2 = null;
+    static Fitbitdata recentFit3 = null;
+
     @Autowired
     FitbitdataServiceImpl fitbitdataServiceImpl;
 
@@ -36,9 +41,34 @@ public class FitbitdataController {
         fdata.setFid(fitbitdata.getFid());
         fdata.setHeartrate(fitbitdata.getHeartrate());
         fdata.setTime(fitbitdata.getTime());
+        if(fdata.getFid()==1){
+            recentFit1 = fdata;
+        }
+        else if(fdata.getFid()==2){
+            recentFit2 = fdata;
+        }
+        else if(fdata.getFid()==3){
+            recentFit3 = fdata;
+        }
 
         return fitbitdataServiceImpl.insert(fdata);
 
+    }
+
+    //If there are may fitbit, consider of using Redis
+    // if you want, add something into the header return error message, I am too lazy
+    @RequestMapping(method= RequestMethod.GET ,value ="/recentFitbit={fid}")
+    public Fitbitdata recentFitbitData(@PathVariable("fid") int fid){
+
+        if(fid == 1){
+            return recentFit1;
+        }
+        else if(fid == 2){
+            return recentFit2;
+        }
+        else {
+            return recentFit3;
+        }
     }
 
     @RequestMapping(method= RequestMethod.GET ,value ="/getAllbyfid={fid}")

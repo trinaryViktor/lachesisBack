@@ -49,7 +49,7 @@ public class PatientsController {
      * @apiSuccess {String} error 500
      */
     @RequestMapping(method = RequestMethod.POST ,value="/uploadPatientsByJSON")
-    public String uploadPatients(@RequestBody @Valid Patients patients){
+    public int uploadPatients(@RequestBody @Valid Patients patients){
         Patients localPatient = new Patients();
         localPatient.setDobday(patients.getDobday());
         localPatient.setDobmonth(patients.getDobmonth());
@@ -59,8 +59,9 @@ public class PatientsController {
         localPatient.setMid(patients.getMid());
         localPatient.setWeight(patients.getWeight());
         localPatient.setHeight(patients.getHeight());
+        System.out.println(localPatient.toString());
         patientsServiceImpl.insert(localPatient);
-        return patients.toString();
+        return localPatient.getPid();
     }
 
     /**
@@ -94,4 +95,8 @@ public class PatientsController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/getAllPatients")
     public List<Patients> getAllPatients(){return patientsServiceImpl.selectAllPatients();}
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getActivePatients")
+    public List<Patients> getActivepatients(){return patientsServiceImpl.getActivePatietns();}
+
 }

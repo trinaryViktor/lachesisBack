@@ -9,6 +9,7 @@ import java.util.List;
 public interface PatientsService {
     Patients selectByPrimaryKey(int id);
     List<Patients> selectAllPatients();
+    List<Patients> getActivePatietns();
     int updateByPrimaryKey(Patients patients);
     int insert(Patients patients);
     int insertSelective(Patients patients);

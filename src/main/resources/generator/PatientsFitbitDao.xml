@@ -20,6 +20,13 @@
 
   </select>
 
+  <select id="selectByPid" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from patients_fitbit
+    where pid=#{pid,jdbcType=INTEGER} and ISNULL(finish)
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -31,12 +38,15 @@
     where matchId = #{matchid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="matchId" keyProperty="matchid" parameterType="com.inf191.lachesis.generate.PatientsFitbit" useGeneratedKeys="true">
+    <selectKey resultType = "java.lang.Integer" order="AFTER" keyProperty="matchid">
+      select @@IDENTITY as matchId
+    </selectKey>
     insert into patients_fitbit (pid, fid, `start`,
       finish)
     values (#{pid,jdbcType=INTEGER}, #{fid,jdbcType=INTEGER}, #{start,jdbcType=TIMESTAMP},
       #{finish,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" keyColumn="matchId" keyProperty="matchid" parameterType="com.inf191.lachesis.generate.PatientsFitbit" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="matchId" keyProperty="matchId" parameterType="com.inf191.lachesis.generate.PatientsFitbit" useGeneratedKeys="true">
     insert into patients_fitbit
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="pid != null">
