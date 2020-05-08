@@ -3,7 +3,7 @@
 <mapper namespace="com.inf191.lachesis.generate.PatientsDao">
   <resultMap id="BaseResultMap" type="com.inf191.lachesis.generate.Patients">
     <id column="pid" jdbcType="INTEGER" property="pid" />
-    <result column="mid" jdbcType="INTEGER" property="mid" />
+    <result column="mid" jdbcType="VARCHAR" property="mid" />
     <result column="dobyear" jdbcType="INTEGER" property="dobyear" />
     <result column="dobmonth" jdbcType="INTEGER" property="dobmonth" />
     <result column="dobday" jdbcType="INTEGER" property="dobday" />
@@ -16,7 +16,7 @@
   </resultMap>
 
   <sql id="Base_Column_List">
-    pid, mid, dobyear, dobmonth, dobday, first_name, middle_name, last_name, weight, 
+    pid, mid, dobyear, dobmonth, dobday, first_name, middle_name, last_name, weight,
     height
   </sql>
 
@@ -30,7 +30,7 @@ on (p.pid=pf.pid) where ISNULL(pf.finish)
   </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from patients
     where pid = #{pid,jdbcType=INTEGER}
@@ -48,16 +48,16 @@ on (p.pid=pf.pid) where ISNULL(pf.finish)
 
   <insert id="insert" keyColumn="pid" keyProperty="pid" parameterType="com.inf191.lachesis.generate.Patients" useGeneratedKeys="true">
     <selectKey resultType = "java.lang.Integer" order="AFTER" keyProperty="pid">
-    select @@IDENTITY as pid
+      select @@IDENTITY as pid
     </selectKey>
     insert into patients (mid, dobyear, dobmonth,
-      dobday, first_name, middle_name, 
-      last_name, weight, height
-      )
-    values (#{mid,jdbcType=INTEGER}, #{dobyear,jdbcType=INTEGER}, #{dobmonth,jdbcType=INTEGER},
-      #{dobday,jdbcType=INTEGER}, #{firstName,jdbcType=VARCHAR}, #{middleName,jdbcType=VARCHAR},
-      #{lastName,jdbcType=VARCHAR}, #{weight,jdbcType=INTEGER}, #{height,jdbcType=INTEGER}
-      )
+    dobday, first_name, middle_name,
+    last_name, weight, height
+    )
+    values (#{mid,jdbcType=VARCHAR}, #{dobyear,jdbcType=INTEGER}, #{dobmonth,jdbcType=INTEGER},
+    #{dobday,jdbcType=INTEGER}, #{firstName,jdbcType=VARCHAR}, #{middleName,jdbcType=VARCHAR},
+    #{lastName,jdbcType=VARCHAR}, #{weight,jdbcType=INTEGER}, #{height,jdbcType=INTEGER}
+    )
   </insert>
 
   <insert id="insertSelective" keyColumn="pid" keyProperty="pid" parameterType="com.inf191.lachesis.generate.Patients" useGeneratedKeys="true">
@@ -93,7 +93,7 @@ on (p.pid=pf.pid) where ISNULL(pf.finish)
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="mid != null">
-        #{mid,jdbcType=INTEGER},
+        #{mid,jdbcType=VARCHAR},
       </if>
       <if test="dobyear != null">
         #{dobyear,jdbcType=INTEGER},
@@ -125,7 +125,7 @@ on (p.pid=pf.pid) where ISNULL(pf.finish)
     update patients
     <set>
       <if test="mid != null">
-        mid = #{mid,jdbcType=INTEGER},
+        mid = #{mid,jdbcType=VARCHAR},
       </if>
       <if test="dobyear != null">
         dobyear = #{dobyear,jdbcType=INTEGER},
@@ -156,7 +156,7 @@ on (p.pid=pf.pid) where ISNULL(pf.finish)
   </update>
   <update id="updateByPrimaryKey" parameterType="com.inf191.lachesis.generate.Patients">
     update patients
-    set mid = #{mid,jdbcType=INTEGER},
+    set mid = #{mid,jdbcType=VARCHAR},
       dobyear = #{dobyear,jdbcType=INTEGER},
       dobmonth = #{dobmonth,jdbcType=INTEGER},
       dobday = #{dobday,jdbcType=INTEGER},

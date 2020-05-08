@@ -19,7 +19,7 @@ public class Patients implements Serializable{
 
     private Integer pid;
 
-    private Integer mid;
+    private String mid;
 
     private Integer dobyear;
 

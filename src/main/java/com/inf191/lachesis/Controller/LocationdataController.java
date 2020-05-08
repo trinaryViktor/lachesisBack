@@ -37,9 +37,8 @@ public class LocationdataController {
     public int insertLocation(@RequestBody @Valid Locationdata locationdata){
         Locationdata ldata = new Locationdata();
         ldata.setMid(locationdata.getMid());
-        if(locationdata.getLocationid().equals("adt35s6d7b78dh9k06d9ns126s8bd7fj3")){
-            ldata.setLocation("room F");
-        }
+            ldata.setLocation(locationdata.getLocation());
+
 
         ldata.setTime(locationdata.getTime());
 

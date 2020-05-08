@@ -16,7 +16,7 @@ import lombok.Setter;
 public class Locationdata implements Serializable {
     private Integer locationid;
 
-    private Integer mid;
+    private String mid;
 
     private String location;
 

@@ -14,7 +14,7 @@ import java.util.Date;
 public class BindingData implements Serializable {
     private Integer pid;
 
-    private Integer mid;
+    private String mid;
 
     private Integer fid;
 

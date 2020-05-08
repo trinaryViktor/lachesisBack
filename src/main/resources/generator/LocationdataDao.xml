@@ -3,7 +3,7 @@
 <mapper namespace="com.inf191.lachesis.generate.LocationdataDao">
   <resultMap id="BaseResultMap" type="com.inf191.lachesis.generate.Locationdata">
     <id column="locationId" jdbcType="INTEGER" property="locationid" />
-    <result column="mid" jdbcType="INTEGER" property="mid" />
+    <result column="mid" jdbcType="VARCHAR" property="mid" />
     <result column="location" jdbcType="VARCHAR" property="location" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
   </resultMap>
@@ -23,7 +23,7 @@
   <insert id="insert" keyColumn="locationId" keyProperty="locationid" parameterType="com.inf191.lachesis.generate.Locationdata" useGeneratedKeys="true">
     insert into locationData (mid, `location`, `time`
       )
-    values (#{mid,jdbcType=INTEGER}, #{location,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}
+    values (#{mid,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" keyColumn="locationId" keyProperty="locationid" parameterType="com.inf191.lachesis.generate.Locationdata" useGeneratedKeys="true">
@@ -41,7 +41,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="mid != null">
-        #{mid,jdbcType=INTEGER},
+        #{mid,jdbcType=VARCHAR},
       </if>
       <if test="location != null">
         #{location,jdbcType=VARCHAR},
@@ -55,7 +55,7 @@
     update locationData
     <set>
       <if test="mid != null">
-        mid = #{mid,jdbcType=INTEGER},
+        mid = #{mid,jdbcType=VARCHAR},
       </if>
       <if test="location != null">
         `location` = #{location,jdbcType=VARCHAR},
@@ -68,7 +68,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.inf191.lachesis.generate.Locationdata">
     update locationData
-    set mid = #{mid,jdbcType=INTEGER},
+    set mid = #{mid,jdbcType=VARCHAR},
       `location` = #{location,jdbcType=VARCHAR},
       `time` = #{time,jdbcType=TIMESTAMP}
     where locationId = #{locationid,jdbcType=INTEGER}
