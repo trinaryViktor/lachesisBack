@@ -34,8 +34,11 @@ public class BindingDataServiceImpl implements BindingDataService {
         patients.setDobyear(bData.getDobyear());
         patients.setDobmonth(bData.getDobmonth());
         patients.setDobday(bData.getDobday());
+        patientsServiceImpl.insert(patients);
 
-        int pid = patientsServiceImpl.insert(patients);
+        int pid = patients.getPid();
+
+        System.out.println("service: "+pid);
 
         patientsFitbit.setPid(pid);
         patientsFitbit.setFid(bData.getFid());

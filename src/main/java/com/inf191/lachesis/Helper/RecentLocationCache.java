@@ -11,8 +11,8 @@ public class RecentLocationCache<K, V> {
     private int cacheSize;
 
     /**
-     * Creates a new LRU cache. 在该方法中，new LinkedHashMap<K,V>(hashTableCapacity,
-     * hashTableLoadFactor, true)中，true代表使用访问顺序
+     * Creates a new LRU cache. in this method，new LinkedHashMap<K,V>(hashTableCapacity,
+     * hashTableLoadFactor, true)中，true means visit in order
      *
      * @param cacheSize
      *            the maximum number of entries that will be kept in this cache.
@@ -34,7 +34,7 @@ public class RecentLocationCache<K, V> {
     }
 
     /**
-     * Retrieves an entry from the cache.<br>
+     * Retrieves an entry from the cache.
      * The retrieved entry becomes the MRU (most recently used) entry.
      *
      * @param key

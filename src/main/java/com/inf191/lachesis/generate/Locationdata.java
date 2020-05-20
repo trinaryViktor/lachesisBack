@@ -14,8 +14,10 @@ import lombok.Setter;
 @Setter
 @Getter
 public class Locationdata implements Serializable {
+    //primary key
     private Integer locationid;
 
+    //
     private String mid;
 
     private String location;

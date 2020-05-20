@@ -38,6 +38,7 @@ public class BindingDataController {
         bd.setStart(bData.getStart());
         bd.setPid(bData.getPid());
 
+        System.out.println("Controller: "+bd.getPid());
         return  bindingDataServiceImpl.signinBindingInfo(bd);
     }
 
@@ -46,7 +47,6 @@ public class BindingDataController {
     @RequestMapping(method = RequestMethod.GET, value = "/SignOffBypid={pid}")
     public int signoffBinding(@PathVariable("pid") int pid){
         List<PatientsFitbit> matchedList = patientFitbitServiceImpl.selectByPid(pid);
-        System.out.println(matchedList);
 
         //if there insert one patietns mistakely multiple times.
         //****** usually do it in cache, but in this case, we just let it read from DBS

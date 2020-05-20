@@ -71,6 +71,11 @@ public class FitbitdataController {
         }
     }
 
+    @RequestMapping(method= RequestMethod.GET ,value ="/getAllActivebypid={pid}")
+    public List<Fitbitdata> selectAllActive(@PathVariable("pid") int pid){
+        return fitbitdataServiceImpl.selectAllActiveBypid(pid);
+    }
+
     @RequestMapping(method= RequestMethod.GET ,value ="/getAllbyfid={fid}")
     public List<Fitbitdata> selectAllByFid(@PathVariable("fid") int fid){
        return fitbitdataServiceImpl.selectAllByFid(fid);

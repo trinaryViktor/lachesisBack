@@ -29,6 +29,13 @@ public class FitbitdataServiceImpl implements FitbitdataService {
     }
 
     @Override
+    public List<Fitbitdata> selectAllActiveBypid(Integer pid) {
+        return fitbitdataDao.selectAllActiveByPid(pid);
+    }
+
+
+
+    @Override
     public List<Fitbitdata> selectAllByFid(Integer fid) {
         return fitbitdataDao.selectAllByFid(fid);
     }

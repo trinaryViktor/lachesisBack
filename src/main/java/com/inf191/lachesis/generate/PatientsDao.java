@@ -8,7 +8,6 @@ import java.util.List;
 public interface PatientsDao {
     int deleteByPrimaryKey(Integer pid);
 
-
     List<Patients> selectAllPatients();
 
     int insert(Patients record);

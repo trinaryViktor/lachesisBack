@@ -8,6 +8,8 @@ import java.util.List;
 public interface FitbitdataDao {
     int deleteByPrimaryKey(Integer heardataid);
 
+    List<Fitbitdata> selectAllActiveByPid(Integer pid);
+
     List<Fitbitdata> selectAllByFid(Integer fid);
 
     int insert(Fitbitdata record);

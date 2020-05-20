@@ -12,6 +12,8 @@ public interface FitbitdataService {
 
     int insertSelective(Fitbitdata record);
 
+    List<Fitbitdata> selectAllActiveBypid(Integer fid);
+
     List<Fitbitdata> selectAllByFid(Integer fid);
 
     Fitbitdata selectByPrimaryKey(Integer fid);

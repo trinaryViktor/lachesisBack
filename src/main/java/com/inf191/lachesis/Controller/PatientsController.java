@@ -59,7 +59,6 @@ public class PatientsController {
         localPatient.setMid(patients.getMid());
         localPatient.setWeight(patients.getWeight());
         localPatient.setHeight(patients.getHeight());
-        System.out.println(localPatient.toString());
         patientsServiceImpl.insert(localPatient);
         return localPatient.getPid();
     }
