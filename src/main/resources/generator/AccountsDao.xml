@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="generate.AccountsDao">
+  <resultMap id="BaseResultMap" type="generate.Accounts">
+    <id column="Account" jdbcType="INTEGER" property="account" />
+    <result column="userName" jdbcType="VARCHAR" property="username" />
+    <result column="hashedPassword" jdbcType="VARCHAR" property="hashedpassword" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Account, userName, hashedPassword
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from Accounts
+    where Account = #{account,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from Accounts
+    where Account = #{account,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="Account" keyProperty="account" parameterType="generate.Accounts" useGeneratedKeys="true">
+    insert into Accounts (userName, hashedPassword)
+    values (#{username,jdbcType=VARCHAR}, #{hashedpassword,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="Account" keyProperty="account" parameterType="generate.Accounts" useGeneratedKeys="true">
+    insert into Accounts
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        userName,
+      </if>
+      <if test="hashedpassword != null">
+        hashedPassword,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="hashedpassword != null">
+        #{hashedpassword,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="generate.Accounts">
+    update Accounts
+    <set>
+      <if test="username != null">
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="hashedpassword != null">
+        hashedPassword = #{hashedpassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Account = #{account,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="generate.Accounts">
+    update Accounts
+    set userName = #{username,jdbcType=VARCHAR},
+      hashedPassword = #{hashedpassword,jdbcType=VARCHAR}
+    where Account = #{account,jdbcType=INTEGER}
+  </update>
+</mapper>
